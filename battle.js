@@ -112,6 +112,31 @@ function isWeak(){
 	}
 	return 1;
 }
+
+//---------- gen var for createMessage ----------
+let textBox = document.querySelector("#textQueue");
+//---------- gen var for createMessage ----------
+async function createMessage(message){
+	return await new Promise(resolve=>{
+
+		let messChar = message.split("");
+		let i = 0 ;
+		let charInter = setInterval( ()=>{
+			
+			textBox.innerHTML += messChar[i];
+			console.log('ccc=>', i , messChar[i])
+			if(i == messChar.length-1){
+				clearInterval(charInter);
+				textBox.innerHTML="";
+				return resolve()
+			}
+			i++;
+			
+		}, 80 );	
+
+	}) 
+	
+}
 //---------- utility function ----------
 
 //---------- gen var for getOpponent ----------
@@ -164,6 +189,7 @@ fireSpell.appendChild(newDiv);
 fireSpell.addEventListener("click", function(){
 	spellSelected = hero.fireMagic.spells[0];
 	masteryModif = hero.fireMagic.mastery;
+	hero.fireMagic.mastery ++
 	playerTurn();
 }); 
 
@@ -176,6 +202,7 @@ waterSpell.appendChild(newDiv);
 waterSpell.addEventListener("click", function(){
 	spellSelected = hero.waterMagic.spells[0];
 	masteryModif = hero.waterMagic.mastery;
+	hero.waterMagic.mastery ++
 	playerTurn();
 });  
 
@@ -188,6 +215,7 @@ windSpell.appendChild(newDiv);
 windSpell.addEventListener("click", function(){
 	spellSelected = hero.windMagic.spells[0];
 	masteryModif = hero.windMagic.mastery;
+	hero.windMagic.mastery ++
 	playerTurn();
 }); 
 
@@ -200,6 +228,7 @@ earthSpell.appendChild(newDiv);
 earthSpell.addEventListener("click", function(){
 	spellSelected = hero.earthMagic.spells[0];
 	masteryModif = hero.earthMagic.mastery;
+	hero.earthMagic.mastery ++
 	playerTurn();
 });  
 let oppPv = document.querySelector("#vilainSide .bars");
@@ -214,28 +243,34 @@ async function playerTurn(){
 	resist = isResistant();
 	let random = randomize(0.85, 1.35);
 
+	if(mana == 0 ){
+		masteryModif = 1;
+		await createMessage ("Zivar: Your out of mana !!! try headbutting him !!! ")
+	}
+
 	let damage = (hero.baseDamage * masteryModif / opponent.defense * resist) * hero.intelligence * weak * random;
 	damage = Math.floor(damage);
-	await createMessage(`${opponent.name} take ${damage}`);
+	await createMessage(`${opponent.name} take ${damage} damage !`);
 	opponent.pv -= damage;
-	oppPv.innerHTML = `PV = ${opponent.pv}`;
+	oppPv.innerHTML = `${opponent.name} PV = ${opponent.pv}`;
 	oppPv.style.width =  opponent.pv + "%";
 	mana.style.width =  100 - spellSelected.manaCost + "%";
+	hero.mana -= spellSelected.manaCost;
 	mana.innerHTML = `MANA = ${hero.mana - spellSelected.manaCost}` 
 	if(checkDead()){
 		endGame();
 	}
-
 	opponentTurn();
 }
-
+//---------- gen var for opponentTurn ----------
 let pv = document.querySelector("#barsWin .bars");
+//---------- gen var for opponentTurn ----------
 async function opponentTurn(){
 	let random = randomize(1.85, 3.35);
 
 	let damage = (opponent.baseDamage / hero.defense) * random;
 	damage = Math.floor(damage); 
-	await createMessage(`You take ${damage} `);
+	await createMessage(`You take ${damage} damage!! `);
 	hero.pv -= damage;
 	pv.innerHTML = `PV = ${hero.pv}`;
 	pv.style.width = hero.pv + "%";
@@ -247,12 +282,12 @@ async function opponentTurn(){
 async function endGame(){
 
 	if (hero.pv <= 0){
-		await createMessage("GAME OVER !!!");
+		await createMessage("ELROY NOOOOO !!!");
 		document.location.href='gameover.html';
 
 	}else if(opponent != baakTik){
 
-		await createMessage("Master Zivar: Well done !!! my apprentice !!")
+		await createMessage("Master Zivar: Well done !!! my apprentice !!");
 		hero.intelligence ++;
 
 		document.location.href='map.html';
@@ -267,37 +302,7 @@ async function endGame(){
 
 //---------- gen var for combatHandler ----------
 let opponent;
-let textBox = document.querySelector("#textQueue");
-
-function aaa(){
-
-}
 //---------- gen var for combatHandler ----------
-async function createMessage(message){
-	return await new Promise(resolve=>{
-
-		let messChar = message.split("");
-		let i = 0 ;
-		let charInter = setInterval( ()=>{
-			
-			textBox.innerHTML += messChar[i];
-			console.log('ccc=>', i , messChar[i])
-			if(i == messChar.length-1){
-				clearInterval(charInter);
-				textBox.innerHTML="";
-				return resolve()
-			}
-			i++;
-			
-		}, 100 );	
-
-	})
-	// setTimeout(function(){
-	// 	textBox.innerHTML = message;
-	// }, 3000); 
-	
-}
-
 async function combatHandler(){
 
 	await createMessage("An ennemy appears");
@@ -313,7 +318,6 @@ async function combatHandler(){
 	}
 }
 combatHandler();
-// createMessage("je test");
 
 
 
