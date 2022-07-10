@@ -112,6 +112,31 @@ function isWeak(){
 	}
 	return 1;
 }
+
+//---------- gen var for createMessage ----------
+let textBox = document.querySelector("#textQueue");
+//---------- gen var for createMessage ----------
+async function createMessage(message){
+	return await new Promise(resolve=>{
+
+		let messChar = message.split("");
+		let i = 0 ;
+		let charInter = setInterval( ()=>{
+			
+			textBox.innerHTML += messChar[i];
+			console.log('ccc=>', i , messChar[i])
+			if(i == messChar.length-1){
+				clearInterval(charInter);
+				textBox.innerHTML="";
+				return resolve()
+			}
+			i++;
+			
+		}, 80 );	
+
+	}) 
+	
+}
 //---------- utility function ----------
 
 //---------- gen var for getOpponent ----------
@@ -164,6 +189,7 @@ fireSpell.appendChild(newDiv);
 fireSpell.addEventListener("click", function(){
 	spellSelected = hero.fireMagic.spells[0];
 	masteryModif = hero.fireMagic.mastery;
+	hero.fireMagic.mastery ++
 	playerTurn();
 }); 
 
@@ -176,6 +202,7 @@ waterSpell.appendChild(newDiv);
 waterSpell.addEventListener("click", function(){
 	spellSelected = hero.waterMagic.spells[0];
 	masteryModif = hero.waterMagic.mastery;
+	hero.waterMagic.mastery ++
 	playerTurn();
 });  
 
@@ -188,6 +215,7 @@ windSpell.appendChild(newDiv);
 windSpell.addEventListener("click", function(){
 	spellSelected = hero.windMagic.spells[0];
 	masteryModif = hero.windMagic.mastery;
+	hero.windMagic.mastery ++
 	playerTurn();
 }); 
 
@@ -200,12 +228,13 @@ earthSpell.appendChild(newDiv);
 earthSpell.addEventListener("click", function(){
 	spellSelected = hero.earthMagic.spells[0];
 	masteryModif = hero.earthMagic.mastery;
+	hero.earthMagic.mastery ++
 	playerTurn();
 });  
 let oppPv = document.querySelector("#vilainSide .bars");
 let mana = document.querySelector("#mana");
 // -----------gen var fo playerturn ----------
-function playerTurn(){
+async function playerTurn(){
 
 	let weak; 
 	let resist; 
@@ -214,28 +243,34 @@ function playerTurn(){
 	resist = isResistant();
 	let random = randomize(0.85, 1.35);
 
+	if(mana == 0 ){
+		masteryModif = 1;
+		await createMessage ("Zivar: Your out of mana !!! try headbutting him !!! ")
+	}
+
 	let damage = (hero.baseDamage * masteryModif / opponent.defense * resist) * hero.intelligence * weak * random;
 	damage = Math.floor(damage);
-	createMessage(`${opponent.name} take ${damage}`);
+	await createMessage(`${opponent.name} take ${damage} damage !`);
 	opponent.pv -= damage;
-	oppPv.innerHTML = `PV = ${opponent.pv}`;
+	oppPv.innerHTML = `${opponent.name} PV = ${opponent.pv}`;
 	oppPv.style.width =  opponent.pv + "%";
 	mana.style.width =  100 - spellSelected.manaCost + "%";
+	hero.mana -= spellSelected.manaCost;
 	mana.innerHTML = `MANA = ${hero.mana - spellSelected.manaCost}` 
 	if(checkDead()){
 		endGame();
 	}
-
 	opponentTurn();
 }
-
+//---------- gen var for opponentTurn ----------
 let pv = document.querySelector("#barsWin .bars");
-function opponentTurn(){
+//---------- gen var for opponentTurn ----------
+async function opponentTurn(){
 	let random = randomize(1.85, 3.35);
 
 	let damage = (opponent.baseDamage / hero.defense) * random;
 	damage = Math.floor(damage); 
-	createMessage(`You take ${damage} `);
+	await createMessage(`You take ${damage} damage!! `);
 	hero.pv -= damage;
 	pv.innerHTML = `PV = ${hero.pv}`;
 	pv.style.width = hero.pv + "%";
@@ -244,60 +279,40 @@ function opponentTurn(){
 	}
 }
 
-function endGame(){
+async function endGame(){
 
 	if (hero.pv <= 0){
-		createMessage("GAME OVER !!!");
-		document.location.href='gameover.html';
+		await createMessage("ELROY NOOOOO !!!");
+		// document.location.href='gameover.html';
 
 	}else if(opponent != baakTik){
 
-		createMessage("Master Zivar: Well done !!! my apprentice !!")
+		await createMessage("Master Zivar: Well done !!! my apprentice !!");
 		hero.intelligence ++;
-
-		document.location.href='map.html';
+		// document.location.href='map.html';
 	}
 	else{
 
-		createMessage("Master Zivar: ... You defeated Baak-Tik !!!! You are now officially a rank 2 apprentice, we will soon start your IF's magic training !!!");
-
-		document.location.href='evolution.html';
+		await createMessage("Master Zivar: ... You defeated Baak-Tik !!!! You are now officially a rank 2 apprentice, we will soon start your IF's magic training !!!");
+		// document.location.href='evolution.html';
 	}
 }
 
 //---------- gen var for combatHandler ----------
 let opponent;
-let textBox = document.querySelector("#textQueue");
 //---------- gen var for combatHandler ----------
-function combatHandler(){
+async function combatHandler(){
 
+	await createMessage("An ennemy appears");
 	opponent = getOpponent();
 	
 	chooseTurn();
 	if (aiTurn) {
-		createMessage(`Master Zivar: ${opponent.name} is faster then you be ready to get hit`);
+		await createMessage(`Master Zivar: ${opponent.name} is faster then you be ready to get hit`);
 		opponentTurn();
 		
 	}else{
-		createMessage(`Master Zivar: You took ${opponent.name} by surprise !! quick choose a spell!!`);
+		await createMessage(`Master Zivar: You took ${opponent.name} by surprise !! quick choose a spell!!`);
 	}
 }
-//combatHandler();
-createMessage("je test");
-
-function createMessage(message){
-
-
-	let messChar = message.split("");
-	let stoper = messChar.length - 1;
-	let charInter;
-	for (let i = 0; i < messChar.length; i++){
-		charInter = setInterval(function(){
-			textBox.innerHTML += messChar[i];
-			if(i == stoper){
-				clearInterval(charInter);
-			}
-		}, 1000);	
-	}
-}
-
+combatHandler();

@@ -19,7 +19,6 @@ body{
 .character{
 	width: 10px;
 	height: 10px;
-	/*background-color: cyan;*/
 	border:  1 px solid blue;
 	position: absolute;
 	left: 0;
