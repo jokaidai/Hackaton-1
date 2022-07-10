@@ -258,7 +258,7 @@ async function playerTurn(){
 	hero.mana -= spellSelected.manaCost;
 	mana.innerHTML = `MANA = ${hero.mana - spellSelected.manaCost}` 
 	if(checkDead()){
-		endGame();
+		return await new Promise (resolve => endGame());
 	}
 	opponentTurn();
 }
@@ -275,26 +275,26 @@ async function opponentTurn(){
 	pv.innerHTML = `PV = ${hero.pv}`;
 	pv.style.width = hero.pv + "%";
 	if(checkDead()){
-		endGame();
+		return await new Promise (resolve => endGame());
 	}
 }
 
 async function endGame(){
-
+	console.log("endGame");
 	if (hero.pv <= 0){
 		await createMessage("ELROY NOOOOO !!!");
-		// document.location.href='gameover.html';
+		document.location.href='gameover.html';
 
 	}else if(opponent != baakTik){
 
 		await createMessage("Master Zivar: Well done !!! my apprentice !!");
 		hero.intelligence ++;
-		// document.location.href='map.html';
+		document.location.href='map.html';
 	}
 	else{
 
 		await createMessage("Master Zivar: ... You defeated Baak-Tik !!!! You are now officially a rank 2 apprentice, we will soon start your IF's magic training !!!");
-		// document.location.href='evolution.html';
+		document.location.href='evolution.html';
 	}
 }
 

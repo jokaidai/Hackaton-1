@@ -56,12 +56,15 @@ body{
 #textQueue{
 	background-color: beige;
 	position: absolute;
-	bottom: -16px;
+	bottom: 0px;
 	left: 0;
 	right: 0;
 	height: 60px;
 	padding: 14px;
 	font-size: 22px;
+	width: 44%;
+	height: 15px;
+	border: 1px solid black;
 }
 .bars{
 	background-color: red;
