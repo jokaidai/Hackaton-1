@@ -205,7 +205,7 @@ earthSpell.addEventListener("click", function(){
 let oppPv = document.querySelector("#vilainSide .bars");
 let mana = document.querySelector("#mana");
 // -----------gen var fo playerturn ----------
-function playerTurn(){
+async function playerTurn(){
 
 	let weak; 
 	let resist; 
@@ -216,7 +216,7 @@ function playerTurn(){
 
 	let damage = (hero.baseDamage * masteryModif / opponent.defense * resist) * hero.intelligence * weak * random;
 	damage = Math.floor(damage);
-	createMessage(`${opponent.name} take ${damage}`);
+	await createMessage(`${opponent.name} take ${damage}`);
 	opponent.pv -= damage;
 	oppPv.innerHTML = `PV = ${opponent.pv}`;
 	oppPv.style.width =  opponent.pv + "%";
@@ -230,12 +230,12 @@ function playerTurn(){
 }
 
 let pv = document.querySelector("#barsWin .bars");
-function opponentTurn(){
+async function opponentTurn(){
 	let random = randomize(1.85, 3.35);
 
 	let damage = (opponent.baseDamage / hero.defense) * random;
 	damage = Math.floor(damage); 
-	createMessage(`You take ${damage} `);
+	await createMessage(`You take ${damage} `);
 	hero.pv -= damage;
 	pv.innerHTML = `PV = ${hero.pv}`;
 	pv.style.width = hero.pv + "%";
@@ -244,22 +244,22 @@ function opponentTurn(){
 	}
 }
 
-function endGame(){
+async function endGame(){
 
 	if (hero.pv <= 0){
-		createMessage("GAME OVER !!!");
+		await createMessage("GAME OVER !!!");
 		document.location.href='gameover.html';
 
 	}else if(opponent != baakTik){
 
-		createMessage("Master Zivar: Well done !!! my apprentice !!")
+		await createMessage("Master Zivar: Well done !!! my apprentice !!")
 		hero.intelligence ++;
 
 		document.location.href='map.html';
 	}
 	else{
 
-		createMessage("Master Zivar: ... You defeated Baak-Tik !!!! You are now officially a rank 2 apprentice, we will soon start your IF's magic training !!!");
+		await createMessage("Master Zivar: ... You defeated Baak-Tik !!!! You are now officially a rank 2 apprentice, we will soon start your IF's magic training !!!");
 
 		document.location.href='evolution.html';
 	}
@@ -268,36 +268,52 @@ function endGame(){
 //---------- gen var for combatHandler ----------
 let opponent;
 let textBox = document.querySelector("#textQueue");
-//---------- gen var for combatHandler ----------
-function combatHandler(){
 
+function aaa(){
+
+}
+//---------- gen var for combatHandler ----------
+async function createMessage(message){
+	return await new Promise(resolve=>{
+
+		let messChar = message.split("");
+		let i = 0 ;
+		let charInter = setInterval( ()=>{
+			
+			textBox.innerHTML += messChar[i];
+			console.log('ccc=>', i , messChar[i])
+			if(i == messChar.length-1){
+				clearInterval(charInter);
+				textBox.innerHTML="";
+				return resolve()
+			}
+			i++;
+			
+		}, 100 );	
+
+	})
+	// setTimeout(function(){
+	// 	textBox.innerHTML = message;
+	// }, 3000); 
+	
+}
+
+async function combatHandler(){
+
+	await createMessage("An ennemy appears");
 	opponent = getOpponent();
 	
 	chooseTurn();
 	if (aiTurn) {
-		createMessage(`Master Zivar: ${opponent.name} is faster then you be ready to get hit`);
+		await createMessage(`Master Zivar: ${opponent.name} is faster then you be ready to get hit`);
 		opponentTurn();
 		
 	}else{
-		createMessage(`Master Zivar: You took ${opponent.name} by surprise !! quick choose a spell!!`);
+		await createMessage(`Master Zivar: You took ${opponent.name} by surprise !! quick choose a spell!!`);
 	}
 }
-//combatHandler();
-createMessage("je test");
-
-function createMessage(message){
+combatHandler();
+// createMessage("je test");
 
 
-	let messChar = message.split("");
-	let stoper = messChar.length - 1;
-	let charInter;
-	for (let i = 0; i < messChar.length; i++){
-		charInter = setInterval(function(){
-			textBox.innerHTML += messChar[i];
-			if(i == stoper){
-				clearInterval(charInter);
-			}
-		}, 1000);	
-	}
-}
 
