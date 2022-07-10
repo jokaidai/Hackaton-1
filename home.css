@@ -6,16 +6,7 @@ body{
 	background-repeat: no-repeat;
 
 	object-fit: cover;
-
-
 }
-
-
-
-
-
-
-
 h1{
 	font-family:, cursive;
 	text-align: center;
@@ -29,13 +20,6 @@ h1{
 	font-weight: bold;
 	text-shadow: -2px 2px 4px black;
 }
-
-
-
-
-
-
-
 h2{
 	text-align: center;
 	font-family: 'Great Vibes', cursive;
@@ -52,32 +36,3 @@ h2{
 		top: 0;
 		right: 0;
 	}
-
-
-
-
-
-
-/*
-
-.game{
-
-	width: 140px;
-	height: 80px;
-	border-radius: 20px;
-	background-color: purple;
-	text-align: center;
-	margin-left: 639px;
-
-
-
-
-
-}*/
-/*a{
-	color: white;
-	text-align: center;
-	text-decoration: none;
-}*/
-
-

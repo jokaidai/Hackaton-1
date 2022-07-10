@@ -28,8 +28,8 @@ let monster = [
 	speed:"20",
 	defense:"25",
 	baseDamage:"15",
-	elemResist:["fire"],
-	elemWeak:["water"]
+	elemResist:["water"],
+	elemWeak:["earth"]
 },
 
 {
@@ -38,8 +38,8 @@ let monster = [
 	speed:"40",
 	defense:"10",
 	baseDamage:"20",
-	elemResist:["fire"],
-	elemWeak:["water"]
+	elemResist:["wind"],
+	elemWeak:["fire"]
 },
 
 {
@@ -48,8 +48,8 @@ let monster = [
 	speed:"10",
 	defense:"40",
 	baseDamage:"20",
-	elemResist:["fire"],
-	elemWeak:["water"]
+	elemResist:["earth"],
+	elemWeak:["wind"]
 }
 ]
 
