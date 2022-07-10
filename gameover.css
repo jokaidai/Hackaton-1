@@ -1,0 +1,17 @@
+body{
+	background-image: url('images/GAME_OVER.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	object-fit: cover;
+}
+.game{
+	width: 300px;
+	height: 80px;
+	background-color: violet;
+	
+}
+a{
+	color: greenyellow;
+	text-decoration: none;
+	font-size: 1.4em;
+}

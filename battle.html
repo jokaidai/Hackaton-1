@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- CSS -->
+	<link rel="stylesheet" href="battle.css">
+	<!-- CSS -->
+	<title>Fight!</title>
+</head>
+<body>
+	<section id="vilainSide">
+		<div class="bars">PV = 100</div>
+		<img class = "char" src="images/BaakTik.png"></div>
+	</section>
+	<section id="heroSide">
+		<img  class = "char" src="images/elroychar.png">
+		<div id="textQueue"> <!-- text get injected here --> </div>
+		<div class="heroWin">
+			<div id="barsWin">
+				<div class="bars">PV = 100 </div>
+				<div class="bars" id="mana">MANA = 100 </div>
+			</div>
+			<div id="abilityWin">
+				<div class="element" id="fire">FIRE MAGIC</div>
+				<div class="element" id="water">WATER MAGIC</div>
+				<div class="element" id="wind">WIND MAGIC</div>
+				<div class="element" id="earth">EARTH MAGIC</div>
+			</div>
+		</div>
+	</section>
+	<audio controls loop >
+		<source src="audio/combat.mp3">
+		</audio>
+
+		<!-- JavaScript -->
+		<script src="battle.js" charset="utf-8"></script>
+		<!-- JavaScript -->
+	</body>
+	</html>

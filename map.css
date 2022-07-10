@@ -1,0 +1,53 @@
+body{
+	background-color:  #00b377;
+	height: 1060px;
+	width: 2120px;
+	position: relative;
+	background-image: url('images/mapdef4.png');
+	
+	background-repeat: no-repeat;
+	
+
+}
+.text{
+	width: 50px;
+	height: 50px;
+	background-color: white;
+}
+
+
+.character{
+	width: 10px;
+	height: 10px;
+	/*background-color: cyan;*/
+	border:  1 px solid blue;
+	position: absolute;
+	left: 0;
+
+
+}
+
+.character2{
+	position: absolute;
+	top: 161px;
+	left: 982px;
+
+}
+
+.backtick{
+	position: absolute;
+	top: 28px;
+	left: 1108px;
+}
+
+
+
+audio{
+	width: 100px;
+	position: absolute;
+	bottom: 353px;
+	right: 693px;
+
+
+
+

@@ -1,0 +1,117 @@
+body{
+	margin: 0px;
+	padding: 0px;
+	background-image: url('images/battlebackground.png');
+	background-repeat: no-repeat;
+	object-fit: cover;
+	background-size: cover;
+}
+#vilainSide{
+	:battle.css
+	display: flex;
+
+	justify-content: flex-end;
+}
+#vilainSide .bars{
+	display: flex;
+	position: absolute;
+	left: 0px;
+	width: 40%;
+	justify-content: center;
+
+}
+#vilainSide .char{
+	display: flex;
+	height: 50vh;
+	align-items: center;
+	width: 20%;
+	justify-content: center;
+	position: relative;
+	left: 70%;
+	top: 60px;
+}
+
+#heroSide{
+	display: flex;
+}
+#heroSide .char{
+	display: flex;
+	height: 50vh;
+	align-items: center;
+	width: 20%;
+	justify-content: center;
+	position: relative;
+	left: 18%;
+}
+.heroWin{
+	display: flex;
+	position: absolute;
+	right: 0px;
+	top: 484px;
+	height: 50vh;
+	width: 36%;
+	justify-content: center;
+	flex-direction: column;
+}
+#textQueue{
+	background-color: beige;
+	position: absolute;
+	bottom: -16px;
+	left: 0;
+	right: 0;
+	height: 60px;
+	padding: 14px;
+	font-size: 22px;
+}
+.bars{
+	background-color: red;
+	color: white;
+	border: solid 1px black;
+}
+#barsWin{
+	position: relative;
+	border: solid 1px black;
+	
+}
+#abilityWin{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	height: 172px;
+	color: white;
+	border: solid 1px black;
+	text-align: center;
+}
+.bars#mana{
+	background-color: blue;
+}
+.element{
+	width: 100%;
+	border: solid 1px black;
+	background-color: beige;
+	color: blueviolet;
+}
+.fireSpell{
+	color: orangered;
+	cursor: pointer;
+}
+.waterSpell{
+	color: royalblue;
+	cursor: pointer;
+}
+.windSpell{
+	color: lightgreen;
+	cursor: pointer;
+}
+.earthSpell{
+	color: sandybrown;
+	cursor: pointer;
+}
+.char{
+	width: 200px;
+}
+audio{
+	width: 100px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}

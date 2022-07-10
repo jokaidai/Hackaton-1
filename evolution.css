@@ -1,0 +1,134 @@
+
+body{
+
+	background-color: beige;
+	width: 100px;
+
+
+}
+h1{
+	font-family: 'Kaushan Script', cursive;
+	text-align: center;
+	font-size: 9em;
+	color: #33ffd6;
+	font-style: italic;
+	text-align: center;
+	position: relative;
+	bottom: 100px;
+	left: 500px;
+	font-weight: bold;
+	text-shadow: -2px 2px 4px black;
+
+
+}
+
+
+img{
+	position: absolute;
+	width: 460px;
+	top: 280px;
+
+}
+h3{
+	font-size: 2em;
+	color: blueviolet;
+}
+.all{
+
+	position: relative;
+	left: 600px;
+	bottom: 200px;
+}
+.int{
+	background-color: whitesmoke;
+	width: 500px;
+	height: 30px;
+	border-radius: 20px;
+}
+.int div{
+	background-color: purple;
+	width: 500px;
+	height: 30px;
+	border-radius: 20px;
+}
+.pv{background-color: whitesmoke;
+	width: 500px;
+	height: 30px;
+	border-radius: 20px;
+
+}
+.pv div{
+	background-color: red;
+	width: 400px;
+	height: 30px;
+	border-radius: 20px;
+
+}
+.def{
+	background-color: whitesmoke;
+	width: 500px;
+	height: 30px;
+	border-radius: 20px;
+
+}
+.def div{
+	background-color: lightblue;
+	width: 450px;
+	height: 30px;
+	border-radius: 20px;
+}
+.speed{
+	background-color: whitesmoke;
+	width: 500px;
+	height: 30px;
+	border-radius: 20px;
+}
+.speed div{
+	background-color: green;
+	width: 290px;
+	height: 30px;
+	border-radius: 20px;
+}
+.mana {
+	background-color: whitesmoke;
+	width: 500px;
+	height: 30px;
+	border-radius: 20px;
+}
+.mana div {
+	background-color: darkblue;
+	width: 540px;
+	height: 30px;
+	border-radius: 20px;
+
+
+}
+.xp{
+	background-color: whitesmoke;
+	width: 500px;
+	height: 30px;
+	border-radius: 20px;
+}
+.xp div {
+	background-color: darkgrey;
+	width: 359px;
+	height: 30px;
+	border-radius: 20px;
+}
+h2{
+	width: 500px;
+	position: relative;
+	bottom: 316px;
+	left: 42px;
+	font-size: 2em;
+}
+p{
+	width: 1400px;
+	font-size: 4em;
+	text-align: center;
+	position: relative;
+	bottom: 250px;
+	color: purple;
+	font-family: 'Kaushan Script', cursive;
+	text-shadow: -2px 2px 4px black;
+}
